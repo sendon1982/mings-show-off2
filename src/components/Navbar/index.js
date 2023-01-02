@@ -9,6 +9,9 @@ const Navbar = () => {
       <Nav>
         <Button>Company Logo</Button>
         <NavMenu>
+          <NavLink to="/login" activeStyle>
+            Login
+          </NavLink>
           <NavLink to="/create-team-template" activeStyle>
             Create Team Template
           </NavLink>
@@ -17,9 +20,6 @@ const Navbar = () => {
           </NavLink>
           <NavLink to="/blogs" activeStyle>
             Blogs
-          </NavLink>
-          <NavLink to="/sign-up" activeStyle>
-            Sign Up
           </NavLink>
         </NavMenu>
       </Nav>
