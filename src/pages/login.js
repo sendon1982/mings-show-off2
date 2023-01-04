@@ -1,8 +1,28 @@
 
-import { Card, CardHeader, CardContent, Container, FormLabel, TextField, CardActionArea, Button } from '@mui/material';
-import React from 'react';
+import axios from 'axios';
+import { Card, CardHeader, CardContent, Container, FormLabel, TextField, Button } from '@mui/material';
+import React, { useState } from 'react';
   
 const Login = () => {
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const axiosInstance = axios.create();
+
+  const handleLogin = () => {
+    const payload = {
+      userName,
+      password,
+    };
+
+    axiosInstance.post('https://localhost:3000/let-me-login', payload)
+    .then(() => {
+      alert('successfully logged');
+    })
+    .catch((err) => {
+      alert('got error: ' + err);
+    })
+  }
+
   return (
     <Container maxWidth='sm'
     sx={{
@@ -16,15 +36,19 @@ const Login = () => {
         }} />
         <CardContent>
           <FormLabel>User Name</FormLabel>
-          <TextField id="user-name" variant="outlined" fullWidth/>
+          <TextField id="user-name" variant="outlined" fullWidth value={userName}
+            onChange={(e) => {setUserName(e.target.value)}}
+          />
           <FormLabel>Password</FormLabel>
-          <TextField id="password" variant="outlined" fullWidth type={'password'} />
+          <TextField id="password" variant="outlined" fullWidth type={'password'} value={password}
+            onChange={(e) => {setPassword(e.target.value)}}
+          />
         </CardContent>
         <CardContent sx={{
           display:'flex',
           justifyContent:'end',
         }}>
-          <Button variant='contained' size='large' color='secondary'>
+          <Button variant='contained' size='large' color='secondary' onClick={handleLogin}>
             Login
           </Button>
         </CardContent>
